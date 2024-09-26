@@ -41,10 +41,17 @@
     <button onclick="openCamera()">Open Camera</button>
     <button onclick="openGallery()">Open Gallery</button>
 
+    <button onclick="backToHome()">Back Home</button>
+
     <div class="success-bar" id="successBar">Operation Successful</div>
     <div class="error-bar" id="errorBar">Operation Failed</div>
 
     <script type="text/javascript">
+
+        function backToHome() {
+            Advance.backToHome();
+        }
+
         function fetchData() {
             window.webkit.messageHandlers.nativeBridge.postMessage({
                 "action": "fetch",
