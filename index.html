@@ -49,7 +49,14 @@
     <script type="text/javascript">
 
         function backToHome() {
-            Advance.backToHome();
+            
+            if ( typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
+                window.webkit.messageHandlers.nativeBridge.postMessage({
+                    "action": "goBack",
+                });
+            } else if (typeof Android !== "undefined" && Android.saveImageData) {
+                Advance.backToHome();
+            }
         }
 
         function fetchData() {
