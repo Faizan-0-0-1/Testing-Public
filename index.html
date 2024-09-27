@@ -54,7 +54,7 @@
                 window.webkit.messageHandlers.nativeBridge.postMessage({
                     "action": "goBack",
                 });
-            } else if (typeof Android !== "undefined" && Android.saveImageData) {
+            } else if (typeof Android !== "undefined" && Android.backToHome) {
                 Android.backToHome();
             }
         }
