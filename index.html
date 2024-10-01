@@ -54,6 +54,7 @@
     <button onclick="openGallery()">Open Gallery</button>
 
     <button onclick="backToHome()">Back Home</button>
+    <button onclick="alertMsg()">Alert Msg</button>
 
     <div class="success-bar" id="successBar">Operation Successful</div>
     <div class="error-bar" id="errorBar">Operation Failed</div>
@@ -168,8 +169,11 @@
                 itemList.appendChild(listItem);
             });
         }
-        
-        // New function to display a list of items
+
+        function backToHome() {
+            printFilePath("ABCDEFG");
+        }
+
         function printFilePath(path) {
             alert("FilePath: " + path);
         }
