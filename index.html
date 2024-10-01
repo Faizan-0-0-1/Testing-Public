@@ -76,11 +76,14 @@
         }
 
         function fetchData() {
-            showSampleList();
-            window.webkit.messageHandlers.nativeBridge.postMessage({
-                "action": "fetch",
-                "entityName": "Company"
-            });
+            if ( typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
+                window.webkit.messageHandlers.nativeBridge.postMessage({
+                    "action": "fetch",
+                    "entityName": "Company"
+                });
+            } else if (typeof Android !== "undefined" && Android.executeSQLQuery) {
+                Android.executeSQLQuery(1,"Select * from UserSettings");
+            }
         }
 
         function insertData() {
@@ -135,15 +138,23 @@
         }
 
         function openCamera() {
-            window.webkit.messageHandlers.nativeBridge.postMessage({
+            if ( typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
+               window.webkit.messageHandlers.nativeBridge.postMessage({
                 "action": "openCamera"
             });
+            } else if (typeof Android !== "undefined" && Android.openCamera) {
+                Android.openCamera();
+            }
         }
 
         function openGallery() {
-            window.webkit.messageHandlers.nativeBridge.postMessage({
+            if ( typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
+                window.webkit.messageHandlers.nativeBridge.postMessage({
                 "action": "openGallery"
             });
+            } else if (typeof Android !== "undefined" && Android.openGallery) {
+                Android.openGallery();
+            }
         }
 
         // New function to display a list of items
