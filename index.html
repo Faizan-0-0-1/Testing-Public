@@ -83,11 +83,19 @@
                     "entityName": "Company"
                 });
             } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
-                Android.executeSqlOnNative({
-                    "database": '1',
-                    "sql": "Select * from UserSettings"
-                });
-            }
+
+                const jsonData = {
+                    database: '1',
+                    sql: 'SELECT * FROM UserSettings'
+                };
+        
+                // Pass the JSON string to Android
+                Android.executeSqlOnNative(JSON.stringify(jsonData));
+            //     Android.executeSqlOnNative({
+            //         "database": '1',
+            //         "sql": "Select * from UserSettings"
+            //     });
+            // }
         }
 
         function insertData() {
@@ -174,7 +182,7 @@
         }
 
         function alertMsg() {
-            printFilePath("A  D FG");
+            printFilePath("A C E G");
         }
 
         function printFilePath(path) {
