@@ -83,10 +83,10 @@
                     "entityName": "Company"
                 });
             } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
-                Android.executeSqlOnNative({
+                Android.executeSqlOnNative(JSON.stringify({
                     "database": "1",
                     "sql": "Select * from UserSettings"
-                });
+                }));
             }
         }
 
@@ -174,7 +174,7 @@
         }
 
         function alertMsg() {
-            printFilePath("  C E G I K");
+            printFilePath("  C   G I K");
         }
 
         function printFilePath(path) {
