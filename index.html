@@ -82,8 +82,11 @@
                     "action": "fetch",
                     "entityName": "Company"
                 });
-            } else if (typeof Android !== "undefined" && Android.executeSQLQuery) {
-                Android.executeSQLQuery(1,"Select * from UserSettings");
+            } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
+                Android.executeSqlOnNative(JSON.stringify({
+                    database = '1',
+                    sql = "Select * from UserSettings"
+                }));
             }
         }
 
