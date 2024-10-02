@@ -83,18 +83,10 @@
                     "entityName": "Company"
                 });
             } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
-
-                const jsonData = {
-                    database: '1',
-                    sql: 'SELECT * FROM UserSettings'
-                };
-        
-                // Pass the JSON string to Android
-                Android.executeSqlOnNative(JSON.stringify(jsonData));
-            //     Android.executeSqlOnNative({
-            //         "database": '1',
-            //         "sql": "Select * from UserSettings"
-            //     });
+                Android.executeSqlOnNative({
+                    "database": "1",
+                    "sql": "Select * from UserSettings"
+                });
             }
         }
 
