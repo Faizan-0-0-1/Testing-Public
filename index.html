@@ -83,10 +83,10 @@
                     "entityName": "Company"
                 });
             } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
-                Android.executeSqlOnNative(JSON.stringify({
+                Android.executeSqlOnNative({
                     "database": '1',
                     "sql": "Select * from UserSettings"
-                }));
+                });
             }
         }
 
