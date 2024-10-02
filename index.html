@@ -85,8 +85,8 @@
             } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
                 alert("Fetch called");
                 Android.executeSqlOnNative(JSON.stringify({
-                    database = '1',
-                    sql = "Select * from UserSettings"
+                    database : '1',
+                    sql : "Select * from UserSettings"
                 }));
             }
         }
