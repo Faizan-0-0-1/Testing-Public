@@ -65,9 +65,8 @@
     </div>
 
     <script type="text/javascript">
-
         function backToHome() {
-            if ( typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
+            if (typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
                 window.webkit.messageHandlers.nativeBridge.postMessage({
                     "action": "goBack",
                 });
@@ -77,7 +76,7 @@
         }
 
         function fetchData() {
-            if ( typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
+            if (typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
                 window.webkit.messageHandlers.nativeBridge.postMessage({
                     "action": "fetch",
                     "entityName": "Company"
@@ -116,21 +115,13 @@
         }
 
         function showSuccessBar() {
-            window.webkit.messageHandlers.nativeBridge.postMessage({
-                "action": "showToast",
-                "toastType": "success",
-                "title": "Toast title",
-                "message": "Successfully shown bar"
-            });
+            document.getElementById('successBar').style.display = 'block';
+            document.getElementById('errorBar').style.display = 'none';
         }
 
         function showErrorBar() {
-            window.webkit.messageHandlers.nativeBridge.postMessage({
-                "action": "showToast",
-                "toastType": "error",
-                "title": "Toast title",
-                "message": "Successfully shown bar"
-            });
+            document.getElementById('errorBar').style.display = 'block';
+            document.getElementById('successBar').style.display = 'none';
         }
 
         function showAlert() {
@@ -142,26 +133,26 @@
         }
 
         function openCamera() {
-            if ( typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
-               window.webkit.messageHandlers.nativeBridge.postMessage({
-                "action": "openCamera"
-            });
+            if (typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
+                window.webkit.messageHandlers.nativeBridge.postMessage({
+                    "action": "openCamera"
+                });
             } else if (typeof Android !== "undefined" && Android.openCamera) {
                 Android.openCamera();
             }
         }
 
         function openGallery() {
-            if ( typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
+            if (typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
                 window.webkit.messageHandlers.nativeBridge.postMessage({
-                "action": "openGallery"
-            });
+                    "action": "openGallery"
+                });
             } else if (typeof Android !== "undefined" && Android.openGallery) {
                 Android.openGallery();
             }
         }
 
-        // New function to display a list of items
+        // Function to display a list of items
         function displayList(items) {
             const itemList = document.getElementById('itemList');
             itemList.innerHTML = ''; // Clear the list
@@ -181,52 +172,40 @@
             alert("FilePath: " + path);
         }
 
-        // Example usage of displayList
-        function showSampleList() {
-            const sampleItems = ["Item 1", "Item 2", "Item 3", "Item 4"];
-            displayList(sampleItems);
-        }
+        // Function to handle query results from the native side
+        function handleQueryResult(result) {
+            console.log("Received result:", result); // Log the raw string received
 
-        
-function handleQueryResult(result) {
-    console.log("Received result:", result); // Log the raw string received
-
-    try {
-        // Parse the top-level result
-        const parsedResult = JSON.parse(result);
-        console.log("Parsed result:", parsedResult); // Log the parsed result
-
-        // Access the 'data' array inside the parsed result
-        const items = parsedResult.data;
-
-        // Parse each item in the 'data' array (since each item is a stringified JSON object)
-        const parsedItems = items.map(item => JSON.parse(item));
-
-        // Map the parsed items to the format you want
-        const formattedItems = parsedItems.map(item => {
-            let valueDisplay;
             try {
-                // Handle Value field based on its content
-                valueDisplay = typeof item.Value === 'string' && item.Value.includes(',')
-                    ? `"${item.Value}"`  // If it contains commas, wrap in quotes
-                    : item.Value;  // Otherwise, display as is
-            } catch (err) {
-                valueDisplay = 'Invalid Value';  // Handle any unexpected cases
+                // Parse the top-level result
+                const parsedResult = JSON.parse(result);
+                console.log("Parsed result:", parsedResult); // Log the parsed result
+
+                // Access the 'data' array inside the parsed result
+                const items = parsedResult.data;
+
+                // Map the parsed items to the format you want
+                const formattedItems = items.map(item => {
+                    let valueDisplay;
+                    try {
+                        // Handle Value field based on its content
+                        valueDisplay = typeof item.Value === 'string' && item.Value.includes(',')
+                            ? `"${item.Value}"`  // If it contains commas, wrap in quotes
+                            : item.Value;  // Otherwise, display as is
+                    } catch (err) {
+                        valueDisplay = 'Invalid Value';  // Handle any unexpected cases
+                    }
+
+                    return `LocalAutoId: ${item.LocalAutoId}, UserId: ${item.UserId}, SettingId: ${item.SettingId}, Value: ${valueDisplay}, IsActive: ${item.IsActive}, DateCreated: ${item.DateCreated}`;
+                });
+
+                // Update the UI list with the formatted items
+                displayList(formattedItems);
+
+            } catch (error) {
+                console.error("Error parsing result:", error);
             }
-
-            return `LocalAutoId: ${item.LocalAutoId}, UserId: ${item.UserId}, SettingId: ${item.SettingId}, Value: ${valueDisplay}, IsActive: ${item.IsActive}, DateCreated: ${item.DateCreated}`;
-        });
-
-        // Update the UI list with the formatted items
-        displayList(formattedItems);
-
-    } catch (error) {
-        console.error("Error parsing result:", error);
-    }
-}
-
-
-
+        }
 
     </script>
 </body>
