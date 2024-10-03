@@ -44,6 +44,7 @@
     <h1>WebView Native Communication</h1>
 
     <button onclick="fetchData()">Fetch Data</button>
+    <button onclick="fetchDataa()">Fetch Dataa</button>
     <button onclick="insertData()">Insert Data</button>
     <button onclick="updateData()">Update Data</button>
     <button onclick="deleteItem()">Delete Item</button>
@@ -85,6 +86,20 @@
                 Android.executeSqlOnNative(JSON.stringify({
                     "database": "2",
                     "sql": "Select * from UserSettings"
+                }));
+            }
+        }
+
+        function fetchDataa() {
+            if (typeof window.webkit !== "undefined" && window.webkit.messageHandlers.nativeBridge) {
+                window.webkit.messageHandlers.nativeBridge.postMessage({
+                    "action": "fetch",
+                    "entityName": "Company"
+                });
+            } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
+                Android.executeSqlOnNative(JSON.stringify({
+                    "database": "2",
+                    "sql": "Select * from UserPermissions"
                 }));
             }
         }
