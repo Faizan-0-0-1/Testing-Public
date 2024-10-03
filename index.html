@@ -240,9 +240,16 @@
         //     }
         // }
         function handleQueryResult(result) {
-            alert(result);
-            console.log("Received result:", result); // Log the raw string received
+            const parsedResult = JSON.parse(result);
+            const message = parsedResult.message;
+            const isFetched = parsedResult.isFetched;
 
+            if (isFetched) {
+                alert(result);
+            } else {
+                alert("Message: " + message);                
+            }
+            
             // try {
             //     // Parse the top-level result
             //     const parsedResult = JSON.parse(result);
