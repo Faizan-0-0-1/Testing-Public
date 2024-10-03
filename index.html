@@ -84,6 +84,7 @@
                 });
             } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
                 Android.executeSqlOnNative(JSON.stringify({
+                    "action": "fetch",
                     "database": "2",
                     "sql": "Select * from UserSettings"
                 }));
@@ -98,6 +99,7 @@
                 });
             } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
                 Android.executeSqlOnNative(JSON.stringify({
+                    "action": "fetch",
                     "database": "2",
                     "sql": "Select * from UserPermissions"
                 }));
@@ -113,6 +115,7 @@
                 });
             } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
                 Android.executeSqlOnNative(JSON.stringify({
+                    "action": "insert",
                     "database": "2",
                     "sql": "Insert into BusinessHours (UserId, Day, StartHour, StartMinute, EndHour, EndMinute, ClosedAllDay, DateCreated) values ('5caab962-3a6b-40ef-b586-cbd18b334fb2', 0, 0, 0, 0, 0, 0, '2010-10-10 10:10:10 UTC')"
                 }));
@@ -129,6 +132,7 @@
                 });
             } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
                 Android.executeSqlOnNative(JSON.stringify({
+                    "action": "update",
                     "database": "2",
                     "sql": "Update BusinessHours set StartHour = 10 where LocalAutoId = 8"
                 }));
