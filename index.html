@@ -130,7 +130,7 @@
             } else if (typeof Android !== "undefined" && Android.executeSqlOnNative) {
                 Android.executeSqlOnNative(JSON.stringify({
                     "database": "2",
-                    "sql": "Update StartHour set StartHour = 10 where LocalAutoId = 8"
+                    "sql": "Update BusinessHours set StartHour = 10 where LocalAutoId = 8"
                 }));
             }
         }
