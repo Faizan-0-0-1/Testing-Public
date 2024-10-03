@@ -174,7 +174,7 @@
         }
 
         function alertMsg() {
-            printFilePath(" B DE G I K");
+            printFilePath("A C DE G I K");
         }
 
         function printFilePath(path) {
@@ -191,11 +191,8 @@
         function handleQueryResult(result) {
             try {
                 // Parse the result from the received JSON string
-                const parsedResult = JSON.parse(result);
+                const parsedResult = JSON.parse(result); // Assuming the result is now properly formatted JSON
                 
-                // Debug: check the structure of parsedResult
-                console.log("Parsed SQL query result:", parsedResult);
-        
                 // Ensure that parsedResult.data exists and is an array
                 if (Array.isArray(parsedResult.data)) {
                     const items = parsedResult.data;
