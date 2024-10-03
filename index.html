@@ -207,28 +207,29 @@
         //     }
         // }
         function handleQueryResult(result) {
+            alert(result);
             console.log("Received result:", result); // Log the raw string received
 
-            try {
-                // Parse the top-level result
-                const parsedResult = JSON.parse(result);
-                console.log("Parsed result:", parsedResult); // Log the parsed result
+            // try {
+            //     // Parse the top-level result
+            //     const parsedResult = JSON.parse(result);
+            //     console.log("Parsed result:", parsedResult); // Log the parsed result
 
-                // Access the 'data' array inside the parsed result
-                const items = parsedResult.data;
+            //     // Access the 'data' array inside the parsed result
+            //     const items = parsedResult.data;
 
-                // Parse each item in the 'data' array (since each item is a stringified JSON object)
-                const parsedItems = items.map(item => JSON.parse(item));
+            //     // Parse each item in the 'data' array (since each item is a stringified JSON object)
+            //     const parsedItems = items.map(item => JSON.parse(item));
 
-                // Map the parsed items to only extract the 'Value' field
-                const values = parsedItems.map(item => item.DateCreated); // Get only the Value field
+            //     // Map the parsed items to only extract the 'Value' field
+            //     const values = parsedItems.map(item => item.DateCreated); // Get only the Value field
 
-                // Update the UI list with the values
-                displayList(values);
+            //     // Update the UI list with the values
+            //     displayList(values);
 
-            } catch (error) {
-                console.error("Error parsing result:", error);
-            }
+            // } catch (error) {
+            //     console.error("Error parsing result:", error);
+            // }
         }
 
     </script>
