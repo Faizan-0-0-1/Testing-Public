@@ -174,7 +174,7 @@
         }
 
         function alertMsg() {
-            printFilePath("A CDEFG I K");
+            printFilePath("ABCDEFGHIJK");
         }
 
         function printFilePath(path) {
@@ -189,13 +189,14 @@
 
         function handleQueryResult(result) {
             console.log("SQL query result received from Android:", result);
-            // Parse the result from JSON string to array of objects
-            const items = JSON.parse(result);
-            // Create an array to store formatted strings for the list
+            // Parse the result from the received JSON string
+            const parsedResult = JSON.parse(result);
+            // Process the result as before
+            const items = parsedResult.data;
             const formattedItems = items.map(item => {
                 return `LocalAutoId: ${item.LocalAutoId}, UserId: ${item.UserId}, SettingId: ${item.SettingId}, Value: ${item.Value}, IsActive: ${item.IsActive}, DateCreated: ${item.DateCreated}`;
             });
-            // Pass the formatted list to display it in the UI
+            // Update the UI list with the formatted items
             displayList(formattedItems);
         }
 
