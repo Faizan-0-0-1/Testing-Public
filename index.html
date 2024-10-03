@@ -174,7 +174,7 @@
         }
 
         function alertMsg() {
-            printFilePath("ABCDEFGHIJK");
+            printFilePath(" BC EF HI K");
         }
 
         function printFilePath(path) {
@@ -188,6 +188,7 @@
         }
 
         function handleQueryResult(result) {
+            alert("RESILT: " + result );
             console.log("SQL query result received from Android:", result);
             // Parse the result from the received JSON string
             const parsedResult = JSON.parse(result);
