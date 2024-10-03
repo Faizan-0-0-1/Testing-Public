@@ -174,7 +174,7 @@
         }
 
         function alertMsg() {
-            printFilePath(" BC EF HI K");
+            printFilePath(" B DE G I K");
         }
 
         function printFilePath(path) {
@@ -187,18 +187,32 @@
             displayList(sampleItems);
         }
 
+        
         function handleQueryResult(result) {
-            alert("RESILT: " + result );
-            console.log("SQL query result received from Android:", result);
-            // Parse the result from the received JSON string
-            const parsedResult = JSON.parse(result);
-            // Process the result as before
-            const items = parsedResult.data;
-            const formattedItems = items.map(item => {
-                return `LocalAutoId: ${item.LocalAutoId}, UserId: ${item.UserId}, SettingId: ${item.SettingId}, Value: ${item.Value}, IsActive: ${item.IsActive}, DateCreated: ${item.DateCreated}`;
-            });
-            // Update the UI list with the formatted items
-            displayList(formattedItems);
+            try {
+                // Parse the result from the received JSON string
+                const parsedResult = JSON.parse(result);
+                
+                // Debug: check the structure of parsedResult
+                console.log("Parsed SQL query result:", parsedResult);
+        
+                // Ensure that parsedResult.data exists and is an array
+                if (Array.isArray(parsedResult.data)) {
+                    const items = parsedResult.data;
+        
+                    // Map the items to the format you want
+                    const formattedItems = items.map(item => {
+                        return `LocalAutoId: ${item.LocalAutoId}, UserId: ${item.UserId}, SettingId: ${item.SettingId}, Value: ${item.Value}, IsActive: ${item.IsActive}, DateCreated: ${item.DateCreated}`;
+                    });
+        
+                    // Update the UI list with the formatted items
+                    displayList(formattedItems);
+                } else {
+                    console.error("Data is not an array:", parsedResult.data);
+                }
+            } catch (error) {
+                console.error("Error parsing result:", error);
+            }
         }
 
     </script>
