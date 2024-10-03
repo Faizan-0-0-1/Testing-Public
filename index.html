@@ -189,14 +189,14 @@
 
         function handleQueryResult(result) {
             console.log("SQL query result received from Android:", result);
-            
-            // Parse the result from JSON string to array
+            // Parse the result from JSON string to array of objects
             const items = JSON.parse(result);
-            
-            // Process the result and update the UI
-            items.forEach(item => {
-                console.log("Row:", item);
+            // Create an array to store formatted strings for the list
+            const formattedItems = items.map(item => {
+                return `LocalAutoId: ${item.LocalAutoId}, UserId: ${item.UserId}, SettingId: ${item.SettingId}, Value: ${item.Value}, IsActive: ${item.IsActive}, DateCreated: ${item.DateCreated}`;
             });
+            // Pass the formatted list to display it in the UI
+            displayList(formattedItems);
         }
 
     </script>
