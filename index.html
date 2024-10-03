@@ -174,7 +174,7 @@
         }
 
         function alertMsg() {
-            printFilePath("A C E  HI K ");
+            printFilePath("ABCDE  HI  G");
         }
 
         function printFilePath(path) {
@@ -188,41 +188,43 @@
         }
 
         
-        function handleQueryResult(result) {
-            console.log("Received result:", result); // Log the raw string received
-        
+function handleQueryResult(result) {
+    console.log("Received result:", result); // Log the raw string received
+
+    try {
+        // Parse the top-level result
+        const parsedResult = JSON.parse(result);
+        console.log("Parsed result:", parsedResult); // Log the parsed result
+
+        // Access the 'data' array inside the parsed result
+        const items = parsedResult.data;
+
+        // Parse each item in the 'data' array (since each item is a stringified JSON object)
+        const parsedItems = items.map(item => JSON.parse(item));
+
+        // Map the parsed items to the format you want
+        const formattedItems = parsedItems.map(item => {
+            let valueDisplay;
             try {
-                // Parse the JSON string result
-                const parsedResult = JSON.parse(result);
-        
-                console.log("Parsed result:", parsedResult); // Log the parsed result
-        
-                // Access the data array inside the parsed result
-                const items = parsedResult.data;
-        
-                // Map the items to the format you want for display
-                const formattedItems = items.map(item => {
-                    // Handle Value field carefully
-                    let valueDisplay;
-                    try {
-                        // Check if the Value field is a JSON or contains commas
-                        valueDisplay = typeof item.Value === 'string' && item.Value.includes(',')
-                            ? `"${item.Value}"`  // If it contains commas, wrap it in quotes
-                            : item.Value;  // Otherwise, display as is
-                    } catch (err) {
-                        valueDisplay = 'Invalid Value';  // Handle any unexpected cases
-                    }
-        
-                    return `LocalAutoId: ${item.LocalAutoId}, UserId: ${item.UserId}, SettingId: ${item.SettingId}, Value: ${valueDisplay}, IsActive: ${item.IsActive}, DateCreated: ${item.DateCreated}`;
-                });
-        
-                // Update the UI list with the formatted items
-                displayList(formattedItems);
-        
-            } catch (error) {
-                console.error("Error parsing result:", error);
+                // Handle Value field based on its content
+                valueDisplay = typeof item.Value === 'string' && item.Value.includes(',')
+                    ? `"${item.Value}"`  // If it contains commas, wrap in quotes
+                    : item.Value;  // Otherwise, display as is
+            } catch (err) {
+                valueDisplay = 'Invalid Value';  // Handle any unexpected cases
             }
-        }
+
+            return `LocalAutoId: ${item.LocalAutoId}, UserId: ${item.UserId}, SettingId: ${item.SettingId}, Value: ${valueDisplay}, IsActive: ${item.IsActive}, DateCreated: ${item.DateCreated}`;
+        });
+
+        // Update the UI list with the formatted items
+        displayList(formattedItems);
+
+    } catch (error) {
+        console.error("Error parsing result:", error);
+    }
+}
+
 
 
 
