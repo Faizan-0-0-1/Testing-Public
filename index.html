@@ -187,6 +187,18 @@
             displayList(sampleItems);
         }
 
+        function handleQueryResult(result) {
+            console.log("SQL query result received from Android:", result);
+            
+            // Parse the result from JSON string to array
+            const items = JSON.parse(result);
+            
+            // Process the result and update the UI
+            items.forEach(item => {
+                console.log("Row:", item);
+            });
+        }
+
     </script>
 </body>
 </html>
