@@ -71,8 +71,8 @@
                 window.webkit.messageHandlers.nativeBridge.postMessage({
                     "action": "goBack",
                 });
-            } else if (typeof Android !== "undefined" && Android.backToHome) {
-                Android.backToHome();
+            } else if (typeof Android !== "undefined" && Android.goBack) {
+                Android.goBack();
             }
         }
 
